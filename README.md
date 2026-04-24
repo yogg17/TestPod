@@ -1,120 +1,84 @@
-# TestPod
+### **Project Summary**
+**TestPod** is an AI-powered educational technology platform that automates the evaluation of subjective, essay-based answers. Developed using the **Spring MVC** framework and **Apache OpenNLP**, the system replaces manual grading with a high-precision NLP pipeline. By decomposing paragraphs into POS-tagged "answer skeletons" and utilizing **Fuzzy Logic** for similarity mapping, TestPod provides educators with instant, data-driven student performance analytics while maintaining grading consistency.
 
-Automated Evaluation Of Essay-Based Questions Based On Natural Language Processing (AI)
+---
 
-## Video Demonstration
+# TestPod: Automated Subjective Evaluation System
+[![Spring](https://img.shields.io/badge/Framework-Spring%20MVC-green.svg)]()
+[![NLP](https://img.shields.io/badge/NLP-Apache%20OpenNLP-blue.svg)]()
+[![Database](https://img.shields.io/badge/Database-MySQL-orange.svg)]()
 
-https://www.youtube.com/watch?v=3l3mN8IC6Ps
+### **Overview**
+TestPod is a full-stack web application designed to bridge the gap between automated objective testing and manual subjective grading. It leverages **Natural Language Processing (NLP)** and **Rule-based Fuzzy Logic** to evaluate essay-based questions, significantly reducing the administrative burden on teaching faculty while providing students with immediate, transparent feedback.
 
-## Abstract
+### **Core Capabilities**
+* **Automated Evaluation Engine:** Utilizes the Maximum Entropy Algorithm for POS tagging and sentence detection to analyze the semantic structure of student responses.
+* **Intelligent Grading Logic:** Implements a hierarchical evaluation model that maps student "answer skeletons" against faculty-provided keys using weighted average scoring.
+* **Fuzzy Logic Inference:** Employs rule-based fuzzy logic to handle the nuances of natural language, generating discrete scores and performance remarks.
+* **Comprehensive Analytics:** Offers a dedicated Faculty Dashboard featuring test statistics, student performance distributions, and step-by-step evaluation reports.
 
-- One of the most crucial aspects of a teaching faculty is to correct the answer sheets
-- With a curriculum driven by tests and scoring, examinations have stood as the backbone of the education industry.
-- Teaching faculty spend an enormous amount of time for verification and assigning the scores to each student. The following action is a limitation as the faculty can focus on other aspects of teaching and enriching the students.
-- The application focuses on a novel methodology to automate the correction for subjective-based questions and answers using NLP Techniques.
+---
 
-## Application Workflow
+### **System Architecture & Workflow**
 
-- The major stakeholders in the application are students and faculty. The faculty is capable of creating a test, monitoring the automated evaluation of each student, and seeing the statistics of the test. The student can logon to the application, attend the test by submitting the test ID, and submit the test for automated evaluation.
 
-- The model is built using Apache OpenNLP. An answer is decomposed into a set of sentences, and sentences are decomposed into tokens. The model decomposes the paragraph into sentences. The set of sentences in an answer goes through text transformation, which includes the removal of trailing spaces and case conversion. Following the transformation of the set of sentences, the text is fed as input to a part-of-speech tagger, which tags the tokens with the appropriate tag.
 
-- The mentioned process is performed on the faculty answer script to generate a skeleton that includes the expected answers. When a student submits an answer, the answer is transformed into a skeleton of tags and tokens, compared with the faculty answer script, and evaluated. The final score is calculated using a weighted average.
+1.  **Ingestion:** Faculty upload questions and "Gold Standard" answer keys.
+2.  **Decomposition:** The system uses `SentenceDetectorME` to segment text and `en-pos-maxent` for Part-of-Speech tagging.
+3.  **Skeletonization:** Answers are transformed into a `<POS Tag, Token>` mapping, removing noise (case conversion, trailing spaces).
+4.  **Comparison:** The student container is cross-referenced with the faculty container to generate a **Similarity Index Matrix**.
+5.  **Scoring:** The matrix is de-fuzzified and marks are calculated using a weighted average technique.
 
-## Tools & Technologies Used
+---
 
-| Purpose            | Name                                      |
-| ------------------ | ----------------------------------------- |
-| Web Framework      | Spring MVC                                |
-| Front-End          | JSP & JSTL                                |
-| Database           | MYSQL                                     |
-| NLP                | Apache Open NLP                           |
-| Sentence Dedection | SentenceDetectorME (OpenNLP)              |
-| POS Tagger         | en-pos-maxent (Maximum entropy Algorithm) |
-| Remarks Generation | Rule-based fuzzy Logic                    |
+### **Technical Stack**
 
-## Modules
+| Layer | Technology | Key Implementation |
+| :--- | :--- | :--- |
+| **Backend** | Spring MVC (Java) | Controller-driven architecture with Java Bean containers. |
+| **NLP Engine** | Apache OpenNLP | Tokenization, POS Tagging, and Sentence Segmentation. |
+| **Database** | MySQL | Relational storage for Test IDs, metadata, and user stats. |
+| **Evaluation** | Fuzzy Logic | Rule-based remark generation and de-fuzzification. |
+| **Front-End** | JSP & JSTL | Dynamic UI for Examination Centres and Dashboards. |
 
-| Purpose                | Description                                                                             |
-| ---------------------- | --------------------------------------------------------------------------------------- |
-| Home page              | Contains information regarding the application                                          |
-| Login                  | Common login for faculty and student                                                    |
-| Faculty Dashboard      | Contains details about the faculty and the tests that were administered                 |
-| Exam Dashboard         | Test statistics and a list of students who took the test are projected                  |
-| Auto Generated Report  | Summary of the student's performance, step-by-step evaluation of the student report     |
-| Examination Centre     | Evaluates the presence of the student's ID in the test and generates the question paper |
-| Digital Question Paper | Platform for the student to answer the questions                                        |
+---
 
-### Home page
+### **Key Modules**
+* **Examination Centre:** Secure portal for students to access tests via unique IDs and submit responses.
+* **Auto-Generated Reports:** High-fidelity feedback loops providing a step-by-step breakdown of how a score was derived.
+* **Digital Question Paper:** An optimized interface for long-form text entry and real-time submission.
+
+### **Demonstration**
+* **Video Walkthrough:** [TestPod Implementation Demo](https://www.youtube.com/watch?v=3l3mN8IC6Ps)
+
+### Snapshots of TestPod
+#### Home page
 
 ![alt text for screen readers](./screenshots/home_page.png "TestPod")
 
-### Login
+#### Login
 
 ![alt text for screen readers](./screenshots/login.png "TestPod")
 
-### Faculty Dashboard
+#### Faculty Dashboard
 
 ![alt text for screen readers](./screenshots/faculty_dashboard.png "TestPod")
 
-### Exam Dashboard
+#### Exam Dashboard
 
 ![alt text for screen readers](./screenshots/exam_dashboard.png "TestPod")
 
-### Auto Generated Report
+#### Auto Generated Report
 
 ![alt text for screen readers](./screenshots/auto_gen_report.png "TestPod")
 
-### Examination Centre
+#### Examination Centre
 
 ![alt text for screen readers](./screenshots/exam_center.png "TestPod")
 
-### Digital Question Paper
+#### Digital Question Paper
 
 ![alt text for screen readers](./screenshots/digital_qp.png "TestPod")
+---
+*Developed to modernize the backbone of the education industry through scalable AI solutions.*
 
-## Algorithm
-
-- The answer is broken down into
-  sentences, using the delimiter (.)
-- The broken array of sentences is
-  parsed using POS sentence tagging
-- The sentences are mapped to the
-  token as <POS Tag, Token> mapping
-- For each sentence, the sentence is
-  iterate through the resources
-  provided to the model for analysis and
-  evaluation
-- An intermediate output in the form
-  of an array of boolean values are generated for further processing by rule-based NLP Techniques
-- The intermediate output is fed to a fuzzifier to generate fuzzy sets for
-  discrete evaluation and using hierarchical-based valuation
-- Finally, the score for the submitted answer is generated using the
-  weighted average technique from the discrete score from the fuzzy sets
-
-## Process Flow
-
-- The application is built using Apache OpenNLP, an NLP tool built for Java
-  applications
-- The major stakeholder of the application are the faculty and the
-  student. The faculty feeds the question and the respective answer key to
-  the application
-- The uploaded questions and answers are processed
-  respectively
-- Every test has a test ID, a unique primary key to map the
-  question with the answer.
-- The questions for the test are saved in
-  RDBMS. The answers are processed using the core NLP package in the
-  application
-- The answer key is processed, tokenized, and POS tagged. The
-  structured answer is stored in a text file along with the metadata of the
-  file
-- When a student attempts the exam, the answers are processed,
-  tokenized and POS tagged. The structured answer script saved as a file is
-  decoded to proper data structures with the help of metadata
-- A container (Java bean) is created to save the information of the structure. Two
-  containers, one for faculty and another for a student are created
-- The student container is passed to the faculty container to find the similarity index
-  matrix
-- The matrix is de-fuzzified using fuzzy logic and appropriate marks
-  are allocated for each question using weighted average method
