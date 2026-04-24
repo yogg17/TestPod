@@ -1,8 +1,3 @@
-### **Project Summary**
-**TestPod** is an AI-powered educational technology platform that automates the evaluation of subjective, essay-based answers. Developed using the **Spring MVC** framework and **Apache OpenNLP**, the system replaces manual grading with a high-precision NLP pipeline. By decomposing paragraphs into POS-tagged "answer skeletons" and utilizing **Fuzzy Logic** for similarity mapping, TestPod provides educators with instant, data-driven student performance analytics while maintaining grading consistency.
-
----
-
 # TestPod: Automated Subjective Evaluation System
 [![Spring](https://img.shields.io/badge/Framework-Spring%20MVC-green.svg)]()
 [![NLP](https://img.shields.io/badge/NLP-Apache%20OpenNLP-blue.svg)]()
